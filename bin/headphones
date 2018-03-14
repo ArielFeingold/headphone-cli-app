@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 
-require './lib/headphones-cli-app.rb'
+require './lib/headphones-buyers-guide-cli-gem.rb'
 
 Headphones::CLI.new.call
