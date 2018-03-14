@@ -1,5 +1,7 @@
-require "xxx/version"
+require 'open-uri'
+require 'nokogiri'
+require 'pry'
 
-module Xxx
-  # Your code goes here...
-end
+require_relative "./headphones/version"
+require_relative './headphones/cli'
+require_relative './headphones/scraper'
