@@ -64,7 +64,7 @@ class Headphones::CLI
           more_info(input, array)
           again
         elsif input.downcase == "exit"
-          exit
+          goodby
         else
           puts "Please choose valid number or type exit".colorize(:red)
         end
