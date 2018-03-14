@@ -1,7 +1,5 @@
 class Headphones::Scraper
 
-  attr_accessor :name, :price, :availability, :url
-
     def self.list(url)
       doc = Nokogiri::HTML(open(url)).css("#rbContent div.bestListing ul li div.itemWrap")
 
@@ -25,8 +23,11 @@ class Headphones::Scraper
       the_bad = doc.css(".theBad").text
       bottom_line = doc.css(".theBottomLine").text
       more_info = {good: the_good, bad: the_bad, bottom: bottom_line}
-      more_info
-      # binding.pry
+      puts "#{more_info[:good]}"
+      puts ""
+      puts "#{more_info[:bad]}"
+      puts ""
+      puts "#{more_info[:bottom]}"
 
     end
 

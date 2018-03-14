@@ -1,8 +1,6 @@
 require 'pry'
 class Headphones::CLI
 
-  attr_accessor :in_ear_array, :over_ear_array, :on_ear_array
-
     def call
       greeting
       find_headphone
@@ -15,6 +13,8 @@ class Headphones::CLI
       puts "1. In-ear"
       puts "2. Over-ear"
       puts "3. On-ear"
+    end
+
 
     def find_headphone
       in_ear_array = Headphones::Scraper.list("https://www.cnet.com/topics/headphones/best-headphones/earbuds/")
@@ -42,13 +42,13 @@ class Headphones::CLI
         end
       end
     end
-  end
+
 
     def generate_list(array)
       # binding.pry
-      puts "Here are the top In-ear headphones. Type number for more info, to start over type exit"
+      puts "Here are the top In-ear headphones:"
       array.each.with_index {|h, i| puts "#{i + 1}. #{array[i][:name]} #{array[i][:price]} \n #{array[i][:description]}"}
-
+      puts "Type headphone number for more info or type exit"
       input = nil
 
       while input != "exit" || !input.to_i.between?(1,array.length)
@@ -57,7 +57,7 @@ class Headphones::CLI
           Headphones::Scraper.more_info(array[input.to_i - 1][:url])
           again
         elsif input.downcase == "exit"
-          call
+          exit
         else
           puts "Please choose valid number"
           array.each.with_index {|h, i| puts "#{i + 1}. #{array[i][:name]} #{array[i][:price]} \n #{array[i][:description]}"}
