@@ -1,6 +1,8 @@
 require 'pry'
 class Headphones::CLI
 
+  attr_accessor :in_ear_array, :over_ear_array, :on_ear_array
+
     def call
       greeting
       find_headphone
@@ -15,14 +17,15 @@ class Headphones::CLI
       puts "3. On-ear"
 
     def find_headphone
-      
+      @in_ear_array = Headphones::Scraper.scrape_in_ear
+
       input = nil
 
       while input != "exit" || !input.to_i.between?(1,3)
         input = gets.strip
         case input
           when "1"
-            in_ear_list
+            type_list(@in_ear_array)
           when "2"
             puts "more details on over-ear headphone "
           when "3"
@@ -39,12 +42,10 @@ class Headphones::CLI
     end
   end
 
-    def in_ear_list
-      array = [{"name" => "sony", "description" => "sony description"},
-                      {"name" => "boss", "description" => "boss description"},
-                      {"name" => "beats", "description" => "beats description"}]
+    def type_list(array)
+      # binding.pry
       puts "Here are the top In-ear headphones. Type number for more info, to start over type exit"
-      array.each.with_index {|h, i| puts "#{i + 1}. #{array[i]["name"]}- #{array[i]["description"]}."}
+      array.each.with_index {|h, i| puts "#{i + 1}. #{array[i][:name]} #{array[i][:price]} \n #{array[i][:description]}"}
 
       input = nil
 
@@ -57,7 +58,7 @@ class Headphones::CLI
           call
         else
           puts "Please choose valid number"
-          array.each.with_index {|h, i| puts "#{i + 1}. #{array[i]["name"]}- #{array[i]["description"]}."}
+          array.each.with_index {|h, i| puts "#{i + 1}. #{array[i][:name]} #{array[i][:price]} \n #{array[i][:description]}"}
         end
       end
     end
@@ -69,7 +70,7 @@ class Headphones::CLI
       while input != "n"
       input = gets.strip
         if input == "y"
-          list_types
+          call
         else
           puts "Do you want to search again? y/n"
         end
