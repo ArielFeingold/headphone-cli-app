@@ -18,11 +18,15 @@ class Headphones::Scraper
     end
 
     def self.more_info(url)
-      doc = Nokogiri::HTML(open(url)).css(".quickInfo")
-      the_good = doc.css(".theGood").text
-      the_bad = doc.css(".theBad").text
-      bottom_line = doc.css(".theBottomLine").text
-      more_info = {good: the_good, bad: the_bad, bottom: bottom_line}
+      # doc = Nokogiri::HTML(open(url)).css(".quickInfo")
+      # the_good = doc.css(".theGood").text
+      # the_bad = doc.css(".theBad").text
+      # bottom_line = doc.css(".theBottomLine").text
+      more_info = {
+        good: doc.css(".theGood").text
+        bad: doc.css(".theBad").text
+        bottom: doc.css(".theBottomLine").text
+      }
 
     puts(<<~EOT)
       The Good
@@ -36,7 +40,7 @@ class Headphones::Scraper
       The Bottom bottom_line
       ______________________
       #{more_info[:bottom]}
-      
+
     EOT
   puts "For full review : #{url}".colorize(:blue)
   puts " "
