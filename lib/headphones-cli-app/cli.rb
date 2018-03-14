@@ -52,7 +52,7 @@ class Headphones::CLI
       while input != "exit" || !input.to_i.between?(1,array.length)
       input = gets.strip
         if input.to_i.between?(1, array.length)
-          puts " #{array[input.to_i - 1]}"
+          Headphones::Scraper.more_info(array[input.to_i - 1][:url])
           again
         elsif input.downcase == "exit"
           call
@@ -77,6 +77,8 @@ class Headphones::CLI
       end
       goodby
     end
+
+
 
     def goodby
       puts "Goodby and good luck finding the perfect hedphones!"
