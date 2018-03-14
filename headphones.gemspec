@@ -4,13 +4,12 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "xxx/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "xxx"
-  spec.version       = Xxx::VERSION
-  spec.authors       = ["TODO: Write your name"]
-  spec.email         = ["TODO: Write your email address"]
+  spec.name          = "Headphones-cli-app"
+  spec.version       = LIB::VERSION
+  spec.authors       = ["Ariel Feingold"]
+  spec.email         = ["feingold.ariel@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
+  spec.summary       = %q{This is a CLI application that scraps the c|net website for headphone reviews and presents it to the user. }
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
 
