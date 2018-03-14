@@ -3,7 +3,7 @@ class Headphones::Scraper
     def self.list(url)
       doc = Nokogiri::HTML(open(url)).css("#rbContent div.bestListing ul li div.itemWrap")
 
-      in_ear_array =[]
+      headphones_array =[]
 
       doc.each do |headphone|
         h_name = headphone.css("h5").text
@@ -12,9 +12,9 @@ class Headphones::Scraper
         h_rating = headphone.css(".subRatings")[0].attribute("aria-label").value
         h_description = headphone.css(".dek").text
 
-        in_ear_array << {name: h_name, price: h_price, url: h_url, rating: h_rating, description: h_description}
+        headphones_array << {name: h_name, price: h_price, url: h_url, rating: h_rating, description: h_description}
       end
-      in_ear_array
+      headphones_array
     end
 
     def self.more_info(url)

@@ -3,7 +3,7 @@ class Headphones::CLI
 
     def call
       greeting
-      find_headphone
+      start
       goodby
     end
 
@@ -16,7 +16,7 @@ class Headphones::CLI
     end
 
 
-    def find_headphone
+    def start
       in_ear_array = Headphones::Scraper.list("https://www.cnet.com/topics/headphones/best-headphones/earbuds/")
       over_ear_array = Headphones::Scraper.list("https://www.cnet.com/topics/headphones/best-headphones/over-the-ear/")
       on_ear_array = Headphones::Scraper.list("https://www.cnet.com/topics/headphones/best-headphones/on-ear/")
@@ -27,11 +27,11 @@ class Headphones::CLI
         input = gets.strip
         case input
           when "1"
-            generate_list(in_ear_array)
+            select_headphone(in_ear_array)
           when "2"
-            puts "more details on over-ear headphone "
+            select_headphone(over_ear_array)
           when "3"
-            puts "more details on on-ear headphone "
+            select_headphone(on_ear_array)
           when "exit"
             goodby
           else
@@ -44,30 +44,36 @@ class Headphones::CLI
     end
 
 
-    def generate_list(array)
-      # binding.pry
-      puts "Here are the top In-ear headphones:"
-      array.each.with_index {|h, i| puts "#{i + 1}. #{array[i][:name]} #{array[i][:price]} \n #{array[i][:description]}"}
+    def select_headphone(array)
+
+      puts "Here are the top headphones:"
+      generate_list(array)
       puts "Type headphone number for more info or type exit"
       input = nil
 
       while input != "exit" || !input.to_i.between?(1,array.length)
       input = gets.strip
         if input.to_i.between?(1, array.length)
-          Headphones::Scraper.more_info(array[input.to_i - 1][:url])
+          more_info(input, array)
           again
         elsif input.downcase == "exit"
           exit
         else
-          puts "Please choose valid number"
-          array.each.with_index {|h, i| puts "#{i + 1}. #{array[i][:name]} #{array[i][:price]} \n #{array[i][:description]}"}
+          puts "Please choose valid number or type exit"
         end
       end
     end
 
+    def generate_list(array)
+      array.each.with_index {|h, i| puts "#{i + 1}. #{array[i][:name]} #{array[i][:price]} \n #{array[i][:description]}"}
+    end
+
+    def more_info(input, array)
+      Headphones::Scraper.more_info(array[input.to_i - 1][:url])
+    end
+
     def again
       puts "Do you want to search again? y/n"
-
       input = nil
       while input != "n"
       input = gets.strip
@@ -79,8 +85,6 @@ class Headphones::CLI
       end
       goodby
     end
-
-
 
     def goodby
       puts "Goodby and good luck finding the perfect hedphones!"
