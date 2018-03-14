@@ -8,11 +8,15 @@ class Headphones::CLI
     end
 
     def greeting
-      puts "Welcome to headphone guide"
-      puts "please choose headphone type. To quit type exit"
-      puts "1. In-ear"
-      puts "2. Over-ear"
-      puts "3. On-ear"
+      puts(<<~EOT)
+
+      Welcome to the Headphone Buyer's Guide
+      ---------------------------
+      To begin choose a headphone type, to quit type exit"
+      1. In-ear
+      2. Over-ear
+      3. On-ear
+      EOT
     end
 
 
@@ -46,9 +50,9 @@ class Headphones::CLI
 
     def select_headphone(array)
 
-      puts "Here are the top headphones:"
+      puts "Here are the top headphones in the catagory:"
       generate_list(array)
-      puts "Type headphone number for more info or type exit"
+      puts "Type headphone number for more info or type exit."
       input = nil
 
       while input != "exit" || !input.to_i.between?(1,array.length)
@@ -65,7 +69,11 @@ class Headphones::CLI
     end
 
     def generate_list(array)
-      array.each.with_index {|h, i| puts "#{i + 1}. #{array[i][:name]} #{array[i][:price]} \n #{array[i][:description]}"}
+      array.each.with_index do |h, i|
+        puts "#{i + 1}. #{array[i][:name].colorize(:green)} #{array[i][:price]} \n #{array[i][:description]}"
+        puts "#{array[i][:rating]}"
+        puts " "
+      end
     end
 
     def more_info(input, array)

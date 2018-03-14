@@ -23,6 +23,23 @@ class Headphones::Scraper
       the_bad = doc.css(".theBad").text
       bottom_line = doc.css(".theBottomLine").text
       more_info = {good: the_good, bad: the_bad, bottom: bottom_line}
+
+    puts(<<~EOT)
+      The Good
+      --------
+      #{more_info[:good].split("The Good")[1]}
+
+      The Bad
+      _______
+      #{more_info[:bad].split("The Bad")[1]}
+
+      The Bottom bottom_line
+      ______________________
+
+      #{more_info[:bottom]}
+
+    EOT
+
       puts "#{more_info[:good]}"
       puts ""
       puts "#{more_info[:bad]}"
