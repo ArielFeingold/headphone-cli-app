@@ -15,6 +15,7 @@ class Headphones::CLI
       puts "3. On-ear"
 
     def find_headphone
+      
       input = nil
 
       while input != "exit" || !input.to_i.between?(1,3)
