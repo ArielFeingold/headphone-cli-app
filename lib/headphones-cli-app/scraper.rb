@@ -35,17 +35,11 @@ class Headphones::Scraper
 
       The Bottom bottom_line
       ______________________
-
       #{more_info[:bottom]}
-
+      
     EOT
-
-      puts "#{more_info[:good]}"
-      puts ""
-      puts "#{more_info[:bad]}"
-      puts ""
-      puts "#{more_info[:bottom]}"
-
-    end
-
+  puts "For full review : #{url}".colorize(:blue)
+  puts " "
   end
+
+end

@@ -39,10 +39,12 @@ class Headphones::CLI
           when "exit"
             goodby
           else
-            puts "Please choose valid number"
-            puts "1. In-ear"
-            puts "2. Over-ear"
-            puts "3. On-ear"
+            puts (<<~EOT).colorize(:red)
+              Please choose valid number or type exit:
+              1. In-ear
+              2. Over-ear
+              3. On-ear
+            EOT
         end
       end
     end
@@ -50,9 +52,10 @@ class Headphones::CLI
 
     def select_headphone(array)
 
-      puts "Here are the top headphones in the catagory:"
+      puts "Here are the top headphones in the catagory:".colorize(:blue)
+      puts " "
       generate_list(array)
-      puts "Type headphone number for more info or type exit."
+      puts "Choose Headphone Number for More Info or Type exit.".colorize(:blue)
       input = nil
 
       while input != "exit" || !input.to_i.between?(1,array.length)
@@ -63,7 +66,7 @@ class Headphones::CLI
         elsif input.downcase == "exit"
           exit
         else
-          puts "Please choose valid number or type exit"
+          puts "Please choose valid number or type exit".colorize(:red)
         end
       end
     end
