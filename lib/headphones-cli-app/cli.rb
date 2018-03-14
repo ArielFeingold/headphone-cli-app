@@ -9,7 +9,6 @@ class Headphones::CLI
 
     def greeting
       puts(<<~EOT)
-
       Welcome to the Headphone Buyer's Guide
       ---------------------------
       To begin choose a headphone type, to quit type exit"
@@ -64,7 +63,7 @@ class Headphones::CLI
           more_info(input, array)
           again
         elsif input.downcase == "exit"
-          goodby
+          exit
         else
           puts "Please choose valid number or type exit".colorize(:red)
         end
