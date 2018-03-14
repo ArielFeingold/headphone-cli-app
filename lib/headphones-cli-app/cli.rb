@@ -17,7 +17,9 @@ class Headphones::CLI
       puts "3. On-ear"
 
     def find_headphone
-      @in_ear_array = Headphones::Scraper.scrape_in_ear
+      in_ear_array = Headphones::Scraper.list("https://www.cnet.com/topics/headphones/best-headphones/earbuds/")
+      over_ear_array = Headphones::Scraper.list("https://www.cnet.com/topics/headphones/best-headphones/over-the-ear/")
+      on_ear_array = Headphones::Scraper.list("https://www.cnet.com/topics/headphones/best-headphones/on-ear/")
 
       input = nil
 
@@ -25,7 +27,7 @@ class Headphones::CLI
         input = gets.strip
         case input
           when "1"
-            type_list(@in_ear_array)
+            generate_list(in_ear_array)
           when "2"
             puts "more details on over-ear headphone "
           when "3"
@@ -42,7 +44,7 @@ class Headphones::CLI
     end
   end
 
-    def type_list(array)
+    def generate_list(array)
       # binding.pry
       puts "Here are the top In-ear headphones. Type number for more info, to start over type exit"
       array.each.with_index {|h, i| puts "#{i + 1}. #{array[i][:name]} #{array[i][:price]} \n #{array[i][:description]}"}

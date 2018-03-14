@@ -2,8 +2,8 @@ class Headphones::Scraper
 
   attr_accessor :name, :price, :availability, :url
 
-    def self.scrape_in_ear
-      doc = Nokogiri::HTML(open("https://www.cnet.com/topics/headphones/best-headphones/earbuds/")).css("#rbContent div.bestListing ul li div.itemWrap")
+    def self.list(url)
+      doc = Nokogiri::HTML(open(url)).css("#rbContent div.bestListing ul li div.itemWrap")
 
       in_ear_array =[]
 
@@ -24,14 +24,8 @@ class Headphones::Scraper
       the_good = doc.css(".theGood").text
       the_bad = doc.css(".theBad").text
       bottom_line = doc.css(".theBottomLine").text
-
-      puts "#{the_good}"
-      puts " "
-      puts "#{the_bad}"
-      puts " "
-      puts "#{bottom_line}"
-      # more_info = {good: the_good, bad: the_bad, bottom: bottom_line}
-      # more_info
+      more_info = {good: the_good, bad: the_bad, bottom: bottom_line}
+      more_info
       # binding.pry
 
     end
