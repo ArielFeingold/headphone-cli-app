@@ -10,7 +10,7 @@ gem install headphones-buyers-guide-cli-gem
 Usage
 Type the below and follow the on screen prompts.
 
-$ headphones
+$ headphones-buyers-guide-cli-gem
 
 Development
 After checking out the repo, run bundle exec bin/setup to install dependencies. Then, run bundle exec rake spec to run the tests.
